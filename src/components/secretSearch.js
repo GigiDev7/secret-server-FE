@@ -7,7 +7,7 @@ const SecretSearch = () => {
         <h1 className="text-3xl font-semibold">Secret Server</h1>
       </div>
       <div className="flex justify-center mt-16">
-        <button className="bg-green-500 hover:bg-green-600 px-3 py-2 mr-2">
+        <button className="rounded-sm bg-green-500 hover:bg-green-600 px-3 py-2 mr-2">
           Get Secret
         </button>
         <input
