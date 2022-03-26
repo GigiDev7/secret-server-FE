@@ -1,18 +1,24 @@
 import React, { useRef, useState } from "react";
 import Modal from "./Modal";
+import { createSecret } from "../api/index";
 
 const SecretForm = () => {
+  const [hash, setHash] = useState("");
   const [isValid, setIsValid] = useState(true);
   const [isModalShown, setIsModalShown] = useState(false);
 
   const secretInputRef = useRef();
   const expirationRef = useRef();
 
-  const handleSubmitClick = () => {
-    if (!secretInputRef.current.value || !expirationRef.current.value) {
+  const handleSubmitClick = async () => {
+    const secretText = secretInputRef.current.value;
+    const expiresAt = expirationRef.current.value;
+    if (!secretText || !expiresAt) {
       setIsValid(false);
     } else {
       setIsValid(true);
+      const { data } = await createSecret({ secretText, expiresAt });
+      setHash(data.hash);
       setIsModalShown(true);
     }
   };
@@ -56,7 +62,11 @@ const SecretForm = () => {
           Submit
         </button>
       </div>
-      {isModalShown && <Modal onClose={() => setIsModalShown(false)}></Modal>}
+      {isModalShown && (
+        <Modal onClose={() => setIsModalShown(false)}>
+          Your generated hash is: {hash}
+        </Modal>
+      )}
     </>
   );
 };
