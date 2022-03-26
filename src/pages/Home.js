@@ -1,6 +1,6 @@
 import React from "react";
-import SecretSearch from "../components/secretSearch";
-import SecretForm from "../components/secretForm";
+import SecretSearch from "../components/SecretSearch";
+import SecretForm from "../components/SecretForm";
 
 const Home = () => {
   return (
